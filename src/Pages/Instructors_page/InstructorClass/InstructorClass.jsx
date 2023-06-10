@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import ClassList from '../../../Component/InstructorsCard/ClassList/ClassList';
 
 const InstructorClass = () => {
     const InstructorClass = useLoaderData()
@@ -24,23 +25,10 @@ const InstructorClass = () => {
                     </thead>
                     <tbody>
                         {
-                            classes.map((AllClass, index) =>
-                                <tr className=" font-bold">
-                                    <th># {index + 1}</th>
-                                    <td>
-                                        <img className='w-16 rounded-lg' src={AllClass.image} alt="" />
-                                    </td>
-                                    <td>{AllClass.name}</td>
-                                    <td>{AllClass.instructors_Name}</td>
-                                    <td>{AllClass.seats}</td>
-                                    <td>$ {AllClass.price}</td>
-                                    <td>
-                                        <button
-                                            className='btn btn-success'
-                                        //  onClick={}
-                                        >Select</button>
-                                    </td>
-                                </tr>)
+                            classes.map((AllClass, index) => <ClassList
+                                AllClass={AllClass}
+                                index={index}
+                            ></ClassList>)
                         }
                     </tbody>
                 </table>

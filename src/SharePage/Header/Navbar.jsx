@@ -10,8 +10,6 @@ const Navbar = () => {
     const navMenu = <>
         <li><Link>Home</Link></li>
         <li><Link to={'/Instructors'}>Instructors</Link></li>
-        <li><Link>Dashboard </Link></li>
-        <li><Link>Dashboard </Link></li>
         <li><Link to='/dashbord'>Dashbord</Link></li>
         {
             user && <li> <Link> <img className='w-10 rounded-full' src={user.photoURL} alt="" /></Link></li>
