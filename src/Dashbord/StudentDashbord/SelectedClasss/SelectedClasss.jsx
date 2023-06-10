@@ -1,22 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../UseHooks/useAuth/useAuth';
 import Selectcourse from '../../../Component/InstructorsCard/SelectCourse/Selectcourse';
-import useSelectCouese from '../../../UseHooks/useSelectCouese/useSelectCouese';
+import Swal from 'sweetalert2';
+import { useQuery } from 'react-query';
+import useAxiosSecure from '../../../UseHooks/useAxiosSecure/useAxiosSecure';
 
 const SelectedClasss = () => {
     const { user } = useAuth();
-    const [selectcourse] = useSelectCouese();
+    const [axiosSecure] = useAxiosSecure()
+    const { data: selectcourse = [], refetch, isLoading } = useQuery(['users'], async () => {
+        
+        const res = await axiosSecure.get(`/SelectedCourse/${user?.email}`)
+        console.log(res.data)
+        return res.data;
+    })
     console.log(selectcourse)
-    // const [selectCourse, setSelectCourse] = useState([]);
-
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/SelectedCourse/${user?.email}`)
-    //         .then(res => res.json())
-    //         .then(data => setSelectCourse(data))
-    // }, []);
 
 
-    // console.log(selectCourse)
+    const handleRemovecourse = (_id) => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(_id);
+                fetch(`http://localhost:5000/SelectCourse/${_id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
+        })
+
+
+    }
+
+
     return (
         <div>
             <h2 className='text-4xl font-bold text-center'>Select Course </h2>
@@ -41,6 +76,7 @@ const SelectedClasss = () => {
                                 course={course}
                                 key={course._id}
                                 index={index}
+                                handleRemovecourse={handleRemovecourse}
                             ></Selectcourse>)
                         }
                     </tbody>

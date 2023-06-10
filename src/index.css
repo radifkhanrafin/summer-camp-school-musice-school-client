@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gradient-btn{
+    @apply btn font-sans font-bold bg-gradient-to-r from-pink-400 to-blue-400 border-0 
+}

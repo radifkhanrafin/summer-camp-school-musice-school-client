@@ -10,7 +10,7 @@ const SocalLogin = () => {
         googleLogin()
             .then(result => {
                 const loggedUser = result.user;
-                const userinfo = { name: loggedUser.displayName, email: loggedUser.email, userProfile: loggedUser.photoURL };
+                const userinfo = { name: loggedUser.displayName, email: loggedUser.email, userProfile: loggedUser.photoURL, role: "student" };
                 console.log(userinfo)
 
                 fetch('http://localhost:5000/users', {

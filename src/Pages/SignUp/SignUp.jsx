@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../AuthProvaiders/AuthProvaider';
+import SocalLogin from '../../SharePage/SocalLogin/SocalLogin';
 
 
 
 const SignUp = () => {
-
+    const navigate = useNavigate()
     const { createUser, updateUserProfile } = useContext(AuthContext)
-    const [error, setError] = useState('')
+    const [error, setError] = useState(null)
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -18,6 +19,7 @@ const SignUp = () => {
                 .then((result) => {
                     updateUserProfile(data.name, data.photo)
                         .then(updateData => {
+                            navigate('/login')
                         })
                         .catch(error => {
                             console.log(error)
@@ -34,7 +36,7 @@ const SignUp = () => {
                 });
         }
         setError("password don't match")
-        console.log(data)
+        console.log(createUser)
 
     };
     return (
@@ -65,7 +67,7 @@ const SignUp = () => {
                             </label>
                             <input type="password" placeholder="password" className="input input-bordered" {...register("password")} />
                         </div>
-                        <span className='text-error'>{error&& error}</span>
+                        <span className='text-error'>{error && error}</span>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Confirm Password</span>
@@ -105,7 +107,10 @@ const SignUp = () => {
                             <input className='btn btn-primary w-full' type="submit" value="Sign Up" />
                         </div>
                     </form>
-                    <Link to='/login'>Login</Link>
+                    <div className='flex justify-between p-3 mb-3'>
+                        <SocalLogin></SocalLogin>
+                        <Link to='/login'><button className='btn btn-primary'>Login</button></Link>
+                    </div>
                 </div>
             </div>
         </div>

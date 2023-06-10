@@ -3,7 +3,6 @@ import {
     createBrowserRouter,
 } from "react-router-dom";
 import UserLayout from '../Layout/UserLayout';
-import Login from '../Pages/Login/Login';
 import SignUp from '../Pages/SignUp/SignUp';
 import Instructors from '../Pages/Instructors/Instructors';
 import InstructorClass from '../Pages/Instructors_page/InstructorClass/InstructorClass';
@@ -11,6 +10,13 @@ import DashBord from '../Layout/DashBord';
 import SelectedClasss from '../Dashbord/StudentDashbord/SelectedClasss/SelectedClasss';
 import EnrolledCourse from '../Dashbord/StudentDashbord/EnrolledCourse/EnrolledCourse';
 import Add_Course from '../Dashbord/InstuctorDashbord/Add_Course/Add_Course';
+import My_Class from '../Dashbord/InstuctorDashbord/My_Class/My_Class';
+import UserLogin from '../Pages/Login/UserLogin';
+import AdminHome from '../Dashbord/AdminDashbord/AdminHome/AdminHome';
+import ManageUsers from '../Dashbord/AdminDashbord/manageUsers/ManageUsers';
+import ManageClass from '../Dashbord/AdminDashbord/ManageClass/ManageClass';
+import Web_Analysis from '../Dashbord/AdminDashbord/Web_Analysis/Web_Analysis';
+// import CheckOutForm from '../Dashbord/StudentDashbord/CheckOutForm/CheckOutForm';
 
 
 const router = createBrowserRouter([
@@ -20,7 +26,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/login',
-                element: <Login></Login>
+                element: <UserLogin></UserLogin>
             },
             {
                 path: '/signup',
@@ -49,9 +55,34 @@ const router = createBrowserRouter([
                 path: 'enrolledCourse',
                 element: <EnrolledCourse></EnrolledCourse>
             },
+            // {
+            //     path: 'payment/:id',
+            //     element: <CheckOutForm></CheckOutForm>,
+            //     // loader:{params}=>fetch()
+            // },
             {
                 path: 'addCourse',
                 element: <Add_Course></Add_Course>
+            },
+            {
+                path: 'myclass',
+                element: <My_Class></My_Class>
+            },
+            {
+                path: 'adminhome',
+                element: <AdminHome></AdminHome>
+            },
+            {
+                path: 'manageUser',
+                element: <ManageUsers></ManageUsers>
+            },
+            {
+                path: 'manageClass',
+                element: <ManageClass></ManageClass>
+            },
+            {
+                path: 'webAnalysis',
+                element: <Web_Analysis></Web_Analysis>
             },
         ]
     }

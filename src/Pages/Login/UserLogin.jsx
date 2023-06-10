@@ -1,21 +1,47 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SocalLogin from '../../SharePage/SocalLogin/SocalLogin';
-// import loginAnimation from "../../assets/132033-green-login.json";
-// import { Lottie } from 'lottie-react';
+import useAuth from '../../UseHooks/useAuth/useAuth';
 
-const Login = () => {
+const UserLogin = () => {
+    const { login } = useAuth()
+    const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const onSubmit = data => {
+        console.log(data)
+        login(data.email, data.password)
+            .then(result => {
+                console.log(result.user)
+                const user = result.user
+                const userinfo = { name: user.displayName, email: user.email, userProfile: user.photoURL, role: "student" };
+                fetch('http://localhost:5000/users', {
+                    method: "POST",
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(userinfo)
+                })
+                    .then(res => res.json())
+                    .then((dataa) => {
+                        if (dataa.insertedId) {
+                            alert('hit hthe kjsabijub')
+                        }
+                        navigate('/')
+                        console.log('dataa', dataa)
+                    })
+                navigate('/')
+            })
+            .catch(error => console.log(error))
+    };
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     {/* <Lottie animationData={loginAnimation}></Lottie> */}
+                    llogin
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form  onSubmit={handleSubmit(onSubmit)} className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -36,12 +62,14 @@ const Login = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
                     </form>
-                    <SocalLogin></SocalLogin>
-                    <Link to='/signup'>Sign Up</Link>
+                    <div className='flex justify-between p-3 mb-3'>
+                        <SocalLogin></SocalLogin>
+                        <Link to='/signup'><button className='btn btn-primary'>Sign Up</button></Link>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default UserLogin;
