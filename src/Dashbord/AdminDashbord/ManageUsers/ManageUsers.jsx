@@ -30,9 +30,8 @@ const ManageUsers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                refetch()
+                refetch();
                 console.log(data)
-
             })
     }
 
@@ -63,7 +62,7 @@ const ManageUsers = () => {
                                 <td className='gap-3 '>
                                     {
                                         user.role === 'admin' ?
-                                            <button onClick={() => handlemakeInstructor(user)} className='btn btn-outline border-pink-600 text-pink-600 w-32'>Instructor </button> : <button onClick={() => handlemakeAdmin(user)} className='btn btn-outline border-blue-700 text-blue-800 w-32'>Admin</button>
+                                            <button onClick={() => handlemakeInstructor(user)} className='btn btn-outline border-pink-600 text-pink-600 w-36 text-xs'>Make Instructor </button> : <button onClick={() => handlemakeAdmin(user)} className='btn btn-outline border-blue-700 text-blue-800 w-36'> Make Admin</button>
                                     }
 
 

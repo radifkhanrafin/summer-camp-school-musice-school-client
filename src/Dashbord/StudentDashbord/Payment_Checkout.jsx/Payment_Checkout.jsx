@@ -1,13 +1,14 @@
-import {useStripe , useElements } from "@stripe/stripe-js";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
 import { useState } from "react";
+import './CheckOut.css'
 import useAuth from "../../../UseHooks/useAuth/useAuth";
 import useAxiosSecure from "../../../UseHooks/useAxiosSecure/useAxiosSecure";
 
 
-const CheckoutForm = ({ cart, price }) => {
-    // const stripe = useStripe();
-    const stripe=useStripe()
+const Payment_Checkout = ({ course, price }) => {
+    // console.log(course)
+    const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
@@ -15,16 +16,16 @@ const CheckoutForm = ({ cart, price }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
-
+    // console.log('course', course)
     useEffect(() => {
         if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price })
                 .then(res => {
-                    console.log(res.data.clientSecret)
+                    console.log('clientSecret', res.data.clientSecret)
                     setClientSecret(res.data.clientSecret);
                 })
         }
-    }, [price, axiosSecure])
+    }, [])
 
 
     const handleSubmit = async (event) => {
@@ -76,23 +77,54 @@ const CheckoutForm = ({ cart, price }) => {
         setProcessing(false)
         if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id);
+
+            fetch(`http://localhost:5000/coursefeepayment/${course._id}`, {
+                method: 'PATCH'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    alert('paid')
+
+                })
+
+
+
             // save payment information to the server
             const payment = {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
                 date: new Date(),
-                quantity: cart.length,
-                cartItems: cart.map(item => item._id),
-                menuItems: cart.map(item => item.menuItemId),
-                status: 'service pending',
-                itemNames: cart.map(item => item.name)
+                quantity: '1',
+                courseId: course._id,
+                // menuItems: cart.map(item => item.menuItemId),
+                status: 'paid',
+                courseName: course.name,
+                image: course.image,
+                instructors_Name: course.instructors_Name,
             }
             axiosSecure.post('/payments', payment)
                 .then(res => {
                     console.log(res.data);
-                    if (res.data.result.insertedId) {
+                    if (res.data.insertedId) {
                         // display confirm
+                        console.log('payment successful')
+
+
+                        fetch(`http://localhost:5000/availableseats/${course.classID}`, {
+                            method: 'PATCH'
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                // alert('sit komse enrolle barse')
+                                console.log('sit komse enrolle barse')
+
+                            })
+
+
+
                     }
                 })
         }
@@ -129,22 +161,4 @@ const CheckoutForm = ({ cart, price }) => {
     );
 };
 
-export default CheckoutForm;
-
-
-
-
-// import React from 'react';
-// import { useLocation } from 'react-router-dom';
-
-// const CheckOutForm = () => {
-//     const paymentData=useLocation()
-//     console.log(paymentData.state)
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default CheckOutForm;
+export default Payment_Checkout;

@@ -3,11 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../AuthProvaiders/AuthProvaider';
 import SocalLogin from '../../SharePage/SocalLogin/SocalLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const [hidePass, setHidePass] = useState(true);
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const [error, setError] = useState(null)
 
@@ -51,35 +53,41 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="Your Name" className="input input-bordered" {...register("name")} />
+                            <input type="text" placeholder="Your Name" className="input input-bordered" {...register("name")} required />
 
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="Your Email" className="input input-bordered" {...register("email")} />
+                            <input type="email" placeholder="Your Email" className="input input-bordered" {...register("email")} required />
 
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="password" placeholder="password" className="input input-bordered" {...register("password")} />
-                        </div>
-                        <span className='text-error'>{error && error}</span>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Confirm Password</span>
-                            </label>
-                            <input type="password" placeholder="Confirm password" className="input input-bordered" {...register("Confrim_password")} />
+                        <div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Password</span>
+                                </label>
+                                <input type={hidePass ?  'password': 'text'} placeholder="password" className="input input-bordered" {...register("password")} required />
+                            </div>
+                            <span className='text-error'>{error && error}</span>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Confirm Password</span>
+                                </label>
+                                <input type={hidePass ?  'password': 'text'} placeholder="Confirm password" className="input input-bordered" {...register("Confrim_password")} required />
 
+                            </div>
+                            <button onClick={() => setHidePass(!hidePass)} className='flex  items-center gap-1 ml-3 my-2'>
+                                {/*  */}
+                                {hidePass ? <><FaEye /> Show Password</> : <><FaEyeSlash />  Hide Password</>}
+                            </button>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Photo URL</span>
                             </label>
-                            <input type="url" placeholder="Photo URL" className="input input-bordered" {...register("photo")} />
+                            <input type="url" placeholder="Photo URL" className="input input-bordered" {...register("photo")} required />
                         </div>
                         <div className="form-control">
                             <label className="label">

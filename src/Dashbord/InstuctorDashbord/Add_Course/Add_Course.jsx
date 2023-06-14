@@ -15,7 +15,10 @@ const Add_Course = () => {
             instructors_Name: data.instructors_Name,
             instructors_email: data.instructors_email,
             price: data.price,
-            instructors_image: user?.photoURL
+            instructors_image: user?.photoURL,
+            enrolled_Student: '0',
+            feedback: "",
+            status: "Pending"
         }
         console.log(classData)
         fetch('http://localhost:5000/newClass', {

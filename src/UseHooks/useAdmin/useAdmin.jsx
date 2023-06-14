@@ -1,5 +1,7 @@
-import React from 'react';
-import useAxiosSecure from '../useAuth/useAxiosSecure/useAxiosSecure';
+import { useQuery } from "react-query";
+import useAuth from "../useAuth/useAuth";
+import useAxiosSecure from "../useAxiosSecure/useAxiosSecure";
+
 
 const useAdmin = () => {
     const { user } = useAuth();

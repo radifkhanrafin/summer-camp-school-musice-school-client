@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 import useAuth from "../useAuth/useAuth";
 import useAxiosSecure from "../useAxiosSecure/useAxiosSecure";
 
@@ -12,7 +13,7 @@ const useinstuctor = () => {
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/instuctor/${user?.email}`);
             // console.log('is instuctor response', res)
-            return res.data.instuctor;
+            return res.data.instructor;
         }
     })
     return [isinstuctor, isinstuctorLoading]

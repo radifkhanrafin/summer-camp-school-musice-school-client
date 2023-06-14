@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import SocalLogin from '../../SharePage/SocalLogin/SocalLogin';
 import useAuth from '../../UseHooks/useAuth/useAuth';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const UserLogin = () => {
     const { login } = useAuth()
     const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+    const [hidePass, setHidePass] = useState(true);
+    console.log(hidePass)
     const onSubmit = data => {
+
         console.log(data)
         login(data.email, data.password)
             .then(result => {
@@ -24,7 +28,7 @@ const UserLogin = () => {
                     .then(res => res.json())
                     .then((dataa) => {
                         if (dataa.insertedId) {
-                            alert('hit hthe kjsabijub')
+                            alert('Login Successful')
                         }
                         navigate('/')
                         console.log('dataa', dataa)
@@ -38,7 +42,7 @@ const UserLogin = () => {
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     {/* <Lottie animationData={loginAnimation}></Lottie> */}
-                    llogin
+                    login
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -46,14 +50,17 @@ const UserLogin = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" placeholder="password" className="input input-bordered" {...register("email")} />
+                            <input type="text" placeholder="password" className="input input-bordered" {...register("email")} required />
 
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" placeholder="password" className="input input-bordered" {...register("password")} />
+                            <div className='relative'>
+                                <input type={hidePass ? 'text' : 'password'} placeholder="password" className="input w-full input-bordered" {...register("password")} required />
+                                <button onClick={() => setHidePass(!hidePass)} className='absolute top-4  right-5'>{hidePass ? <FaEyeSlash /> : <FaEye />} </button>
+                            </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>

@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const Selectcourse = ({ course, index, handleRemovecourse, handleCourseFeePayment }) => {
-    const { image, name, instructors_Name, price, _id } = course;
+    const { image, name, instructors_Name, price, _id  , payment_status} = course;
 
 
 
@@ -17,10 +17,11 @@ const Selectcourse = ({ course, index, handleRemovecourse, handleCourseFeePaymen
             <td>$ {price}</td>
             <td><button className='gradient-btn' onClick={() => handleRemovecourse(_id)}>Unselect</button></td>
             <td>
-                {/* <Link to={`/dashbord/payment/:${_id}`}>
+                <Link to='/dashbord/payment' state={course}>
                     <button className='gradient-btn w-20'>Pay</button>
-                </Link> */}
+                </Link>
             </td>
+            
         </tr>
     );
 };

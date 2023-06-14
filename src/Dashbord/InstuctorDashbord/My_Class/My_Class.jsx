@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 const My_Class = () => {
     const [axiosSecure] = useAxiosSecure()
     const { user } = useAuth()
+
     const { data: classes = [], refetch, isLoading } = useQuery(['classes'], async () => {
         const res = await axiosSecure.get(`/myClass/${user?.email}`)
         console.log(res.data)
@@ -60,8 +61,9 @@ const My_Class = () => {
                             <th>Banner</th>
                             <th>Tutorial</th>
                             <th>Total Enrolled</th>
+                            <th>Available Seats</th>
                             <th>Remove</th>
-                            <th>Update</th>
+                            {/* <th>Update</th> */}
                             <th>Admin Feedback</th>
                         </tr>
                     </thead>
@@ -71,20 +73,19 @@ const My_Class = () => {
                                 <td>{index + 1}</td>
                                 <td><img className='w-24 h-16 rounded' src={AllClass.image} alt="" /></td>
                                 <td>{AllClass.name}</td>
-                                <td>{index + 12}</td>
+                                <td>{AllClass.enrolled_Student}</td>
+                                <td>{AllClass.seats}</td>
                                 <td><button onClick={() => removeMyClass(AllClass._id)}><FaTrashAlt className='text-2xl text-error hover:text-blue-700' /></button></td>
-                                <td></td>
+                                
                                 <th>
-                                    <button className="btn btn-ghost btn-xs">details</button>
+                                    {
+                                        AllClass.status === 'denied' ? <span className='px-2 style-btn '> Admin FeedBack</span> : AllClass.status === 'approved' ? <span className='text-success'>{AllClass.status}</span> : <span className='text-pink-600'>{AllClass.status}...</span>
+                                    }
                                 </th>
                             </tr>)
                         }
-                       
-
-
-
+                        
                     </tbody>
-                    {/* foot */}
 
 
                 </table>

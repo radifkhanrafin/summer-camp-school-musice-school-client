@@ -9,12 +9,12 @@ const SelectedClasss = () => {
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
     const { data: selectcourse = [], refetch, isLoading } = useQuery(['users'], async () => {
-        
+
         const res = await axiosSecure.get(`/SelectedCourse/${user?.email}`)
-        console.log(res.data)
+        // console.log(res.data)
         return res.data;
     })
-    console.log(selectcourse)
+    // console.log(selectcourse)
 
 
     const handleRemovecourse = (_id) => {

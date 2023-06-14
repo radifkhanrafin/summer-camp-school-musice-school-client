@@ -3,16 +3,15 @@ import useAuth from '../../../UseHooks/useAuth/useAuth';
 import useAxiosSecure from '../../../UseHooks/useAxiosSecure/useAxiosSecure';
 import { useQuery } from 'react-query';
 
-const EnrolledCourse = () => {
+const Payment_History = () => {
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
-    
-    const { data: enrolledcourse = [], refetch, isLoading } = useQuery(['enrolledcourse'], async () => {
-        const res = await axiosSecure.get(`/enrolledcourse/${user?.email}`)
-        // console.log(res.data)
+
+    const { data: paymenthistory = [], refetch, isLoading } = useQuery(['paymenthistory'], async () => {
+        const res = await axiosSecure.get(`/paymenthistory/${user?.email}`)
+        console.log(res.data)
         return res.data;
     })
-    console.log(enrolledcourse)
     return (
         <div>
             <div className="overflow-x-auto">
@@ -21,31 +20,29 @@ const EnrolledCourse = () => {
                     <thead className='rounded-full font-bold'>
                         <tr className='bg-blue-400 '>
                             <th>SN</th>
-                            <th>Banner</th>
                             <th>Course</th>
                             <th>Instructors</th>
-                            <th>Course fee</th>
+                            <th>Transaction ID</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         {
-                            enrolledcourse.map((enrolle , index) =>
-                                <tr key={enrolle._id} className="bg-base-200">
+                            paymenthistory.map((payment, index) =>
+                                <tr key={payment._id} className="bg-base-200">
                                     <th>{index + 1}</th>
-                                    <td><img className='w-20 h-12 rounded-md' src={enrolle.image} alt="" /></td>
-                                    <td>{enrolle.name}</td>
-                                    <td>{enrolle.instructors_Name}</td>
-                                    <td>$ {enrolle.price}</td>
                                     
+                                    <td>{payment.courseName}</td>
+                                    <td>{payment.instructors_Name}</td>
+                                    <td>$ {payment.transactionId}</td>
+
                                 </tr>)
                         }
                     </tbody>
                 </table>
             </div>
-
         </div>
     );
 };
 
-export default EnrolledCourse;
+export default Payment_History;

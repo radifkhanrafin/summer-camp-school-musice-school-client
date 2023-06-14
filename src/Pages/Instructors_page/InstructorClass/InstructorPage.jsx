@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import ClassList from '../../../Component/InstructorsCard/ClassList/ClassList';
 
-const InstructorClass = () => {
+const InstructorPage = () => {
     const InstructorClass = useLoaderData()
     const { classes } = InstructorClass
     console.log(InstructorClass)
@@ -37,4 +37,4 @@ const InstructorClass = () => {
     );
 };
 
-export default InstructorClass;
+export default InstructorPage;

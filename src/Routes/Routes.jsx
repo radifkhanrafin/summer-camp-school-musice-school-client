@@ -5,7 +5,6 @@ import {
 import UserLayout from '../Layout/UserLayout';
 import SignUp from '../Pages/SignUp/SignUp';
 import Instructors from '../Pages/Instructors/Instructors';
-import InstructorClass from '../Pages/Instructors_page/InstructorClass/InstructorClass';
 import DashBord from '../Layout/DashBord';
 import SelectedClasss from '../Dashbord/StudentDashbord/SelectedClasss/SelectedClasss';
 import EnrolledCourse from '../Dashbord/StudentDashbord/EnrolledCourse/EnrolledCourse';
@@ -16,7 +15,13 @@ import AdminHome from '../Dashbord/AdminDashbord/AdminHome/AdminHome';
 import ManageUsers from '../Dashbord/AdminDashbord/manageUsers/ManageUsers';
 import ManageClass from '../Dashbord/AdminDashbord/ManageClass/ManageClass';
 import Web_Analysis from '../Dashbord/AdminDashbord/Web_Analysis/Web_Analysis';
+import Class from '../Pages/Class/Class';
+import StudentDashbord from '../Dashbord/StudentDashbord/StudentDashbord';
 // import CheckOutForm from '../Dashbord/StudentDashbord/CheckOutForm/CheckOutForm';
+import Payment_Checkout from '../Dashbord/StudentDashbord/Payment_Checkout.jsx/Payment_Checkout';
+import Payment from '../Dashbord/StudentDashbord/Payment/Payment';
+import PrivateRoutes from './PrivateRoutes';
+import Payment_History from '../Dashbord/StudentDashbord/Payment_History/Payment_History';
 
 
 const router = createBrowserRouter([
@@ -37,31 +42,37 @@ const router = createBrowserRouter([
                 element: <Instructors></Instructors>
             },
             {
-                path: '/:id',
-                element: <InstructorClass></InstructorClass>,
-                loader: ({ params }) => fetch(`http://localhost:5000/instructors/${params.id}`)
+                path: '/Class',
+                element: <Class></Class>
             },
         ]
     },
     {
         path: '/dashbord',
-        element: <DashBord></DashBord>,
+        element: <PrivateRoutes><DashBord></DashBord></PrivateRoutes>,
         children: [
             {
-                path: 'selectedCourse',
+                path: 'userHome',
+                element: <StudentDashbord></StudentDashbord>
+            },
+            {
+                path: 'selectedcourse',
                 element: <SelectedClasss></SelectedClasss>
             },
             {
-                path: 'enrolledCourse',
+                path: 'enrolledcourse',
                 element: <EnrolledCourse></EnrolledCourse>
             },
-            // {
-            //     path: 'payment/:id',
-            //     element: <CheckOutForm></CheckOutForm>,
-            //     // loader:{params}=>fetch()
-            // },
             {
-                path: 'addCourse',
+                path: 'payment',
+                element: <Payment></Payment>
+            },
+            {
+                path: 'paymenthistory',
+                element: <Payment_History></Payment_History>
+            },
+            {
+                path: 'addcourse',
                 element: <Add_Course></Add_Course>
             },
             {
@@ -73,15 +84,15 @@ const router = createBrowserRouter([
                 element: <AdminHome></AdminHome>
             },
             {
-                path: 'manageUser',
+                path: 'manageuser',
                 element: <ManageUsers></ManageUsers>
             },
             {
-                path: 'manageClass',
+                path: 'manageclass',
                 element: <ManageClass></ManageClass>
             },
             {
-                path: 'webAnalysis',
+                path: 'webanalysis',
                 element: <Web_Analysis></Web_Analysis>
             },
         ]

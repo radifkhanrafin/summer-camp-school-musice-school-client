@@ -5,27 +5,30 @@ import useAxiosSecure from '../../UseHooks/useAxiosSecure/useAxiosSecure';
 
 
 const Instructors = () => {
-    const [instructors, setInstructors] = useState([])
 
-    useEffect(() => {
-        // fetch('instactor.json')
-        fetch('http://localhost:5000/instructors')
-            .then(res => res.json())
-            .then(data => {
-                //  console.log(data)
-                setInstructors(data)
-            })
-    }, []);
-    console.log("instructors", instructors)
+    const [axiosSecure] = useAxiosSecure()
+    const { data: allInstructors = [], refetch } = useQuery(['allInstructors'], async () => {
+        const res = await axiosSecure.get('/instructors')
+        console.log(res.data)
+        return res.data;
+    })
+
+    console.log("instructors", allInstructors)
     return (
         <div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  mt-12'>
                 {
-                    instructors.map(Instructor => <InstructorsCard
-                        key={Instructor._id}
-                        Instructor={Instructor}
-                        image={Instructor.image}
-                    ></InstructorsCard>)
+                    allInstructors.map(instructors =>
+                        <div key={instructors._id} className="card  card-compact bg-slate-300 w-96 h-96  shadow-xl">
+                            <figure><img className='w-96 h-80 rounded-md' src={instructors.userProfile} alt="Shoes" /></figure>
+
+                            <div className="card-body">
+                                <h2 className="card-title">Instructor : {instructors.name}</h2>
+                                <h2 className="">Available Seats : {instructors.email}</h2>
+                                {/* <button className="btn btn-primary">Select class</button> */}
+                            </div>
+                        </div>
+                    )
                 }
             </div>
         </div>

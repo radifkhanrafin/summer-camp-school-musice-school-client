@@ -26,6 +26,7 @@ const useAxiosSecure = () => {
             (response) => response,
             async (error) => {
                 // console.log('axiox error respone' , error.response)
+                console.log(error)
                 if (error.response && (error.response.status === 401 || error.response.status === 403)) {
                     // await logOut();
                     // navigate('/login');
@@ -34,7 +35,7 @@ const useAxiosSecure = () => {
                 return Promise.reject(error);
             }
         );
-    }, [ axiosSecure]);
+    }, [axiosSecure]);
 
     return [axiosSecure];
 };
