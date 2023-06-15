@@ -36,7 +36,7 @@ const ClassList = ({ classes, refetch }) => {
                     refetch()
                     setDisableBtn(true)
                     Swal.fire(
-                        'Your file has been deleted.',
+                        
                         'success'
                     )
                 }

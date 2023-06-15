@@ -6,7 +6,6 @@ import { AuthContext } from '../../AuthProvaiders/AuthProvaider';
 import SocalLogin from '../../SharePage/SocalLogin/SocalLogin';
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/signup.json";
-import { Helmet } from 'react-helmet-async';
 
 
 const SignUp = () => {
@@ -47,9 +46,6 @@ const SignUp = () => {
     console.log(error)
     return (
         <div>
-            <Helmet>
-                <title>Sign Up</title>
-            </Helmet>
             <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
