@@ -8,13 +8,13 @@ import useAxiosSecure from '../../../UseHooks/useAxiosSecure/useAxiosSecure';
 const SelectedClasss = () => {
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
-    const { data: selectcourse = [], refetch, isLoading } = useQuery(['users'], async () => {
 
+    const { data: selectcourse = [], refetch, isLoading } = useQuery(['users'], async () => {
         const res = await axiosSecure.get(`/SelectedCourse/${user?.email}`)
         // console.log(res.data)
+        
         return res.data;
     })
-    // console.log(selectcourse)
 
 
     const handleRemovecourse = (_id) => {
@@ -30,7 +30,7 @@ const SelectedClasss = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(_id);
-                fetch(`http://localhost:5000/SelectCourse/${_id}`, {
+                fetch(`https://summer-school-data.vercel.app/SelectCourse/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

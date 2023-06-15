@@ -14,6 +14,7 @@ const Payment_History = () => {
     })
     return (
         <div>
+            
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -21,6 +22,7 @@ const Payment_History = () => {
                         <tr className='bg-blue-400 '>
                             <th>SN</th>
                             <th>Course</th>
+                            <th>Payment Amount</th>
                             <th>Instructors</th>
                             <th>Transaction ID</th>
                         </tr>
@@ -33,8 +35,9 @@ const Payment_History = () => {
                                     <th>{index + 1}</th>
                                     
                                     <td>{payment.courseName}</td>
+                                    <td>${payment.price}</td>
                                     <td>{payment.instructors_Name}</td>
-                                    <td>$ {payment.transactionId}</td>
+                                    <td>{payment.transactionId}</td>
 
                                 </tr>)
                         }

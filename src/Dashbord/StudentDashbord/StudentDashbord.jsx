@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaHome, FaUtensils } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../UseHooks/useAuth/useAuth';
 
@@ -14,8 +13,8 @@ const StudentDashbord = () => {
         <li >{user?.email}</li>
         <li >{user?.role}</li>
       </div>
-      <li><NavLink to='/dashbord/usershome'><FaHome /> Users home </NavLink></li>
-      <li><NavLink to='/dashbord/selectedcourse'> <FaUtensils /> Selected Course </NavLink></li>
+      <li><NavLink to='/dashbord/usershome'> Users home </NavLink></li>
+      <li><NavLink to='/dashbord/selectedcourse'> Selected Course </NavLink></li>
       <li><NavLink to='/dashbord/enrolledcourse'>Enrolled Classes</NavLink></li>
       <li><NavLink to='/dashbord/paymenthistory'> Payment History</NavLink></li>
     </>

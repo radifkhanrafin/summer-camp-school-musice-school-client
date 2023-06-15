@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import useAxiosSecure from '../../../UseHooks/useAxiosSecure/useAxiosSecure';
+import { Fade } from 'react-awesome-reveal';
 
 const ManageUsers = () => {
     const [axiosSecure] = useAxiosSecure()
@@ -13,7 +14,7 @@ const ManageUsers = () => {
 
     const handlemakeAdmin = (user) => {
         console.log(user)
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://summer-school-data.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -25,7 +26,7 @@ const ManageUsers = () => {
     }
     const handlemakeInstructor = (user) => {
         console.log(user)
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`https://summer-school-data.vercel.app/users/instructor/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -37,48 +38,46 @@ const ManageUsers = () => {
 
     return (
         <div>
-            manage users {users.length}
+            <h2 className='text-3xl text-center font-semibold'>  All Users</h2>
             <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead className='text-center'>
-                        <tr>
-                            <th>SN</th>
-                            <th>User</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                            <th>Status</th>
-                            {/* <th>Remove</th> */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user, index) =>
-                            <tr key={user._id}>
-                                <th>{index + 1}</th>
-                                <td><img className='w-16 h-16 rounded-full' src={user.userProfile} alt="user Image" /></td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td className='gap-3 '>
-                                    {
-                                        user.role === 'admin' ?
-                                            <button onClick={() => handlemakeInstructor(user)} className='btn btn-outline border-pink-600 text-pink-600 w-36 text-xs'>Make Instructor </button> : <button onClick={() => handlemakeAdmin(user)} className='btn btn-outline border-blue-700 text-blue-800 w-36'> Make Admin</button>
-                                    }
+                <Fade>
+                    <table className="table">
+                        {/* head */}
+                        <thead className='text-center'>
+                            <tr>
+                                <th>SN</th>
+                                <th>User</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                                <th>Action</th>
+                                {/* <th>Remove</th> */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((user, index) =>
+                                <tr key={user._id}>
+                                    <th>{index + 1}</th>
+                                    <td><img className='w-16 h-16 rounded-full' src={user.userProfile} alt="user Image" /></td>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
 
+                                    <td className='gap-3 '>
+                                        <button disabled={user.role === 'admin'} onClick={() => handlemakeAdmin(user)} className='btn btn-outline border-blue-700 text-blue-800 w-36'> Make Admin</button>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
-                                    <button disabled={true} className='btn btn-outline border-pink-600 text-pink-600 w-32'>{user.role}</button>
-                                </td>
-                                {/* <td>
-                                    {user.role === 'admin ' || user.role === 'instructor' ? <button className=' text-pink-600 w-32'><small>Make Student</small></button> : ''}
-
-                                </td> */}
-                            </tr>)}
-
-
-                    </tbody>
-                </table>
+                                        <button disabled={user.role === 'instructor'} onClick={() => handlemakeInstructor(user)} className='btn btn-outline border-pink-600 text-pink-600 w-36 text-xs'>Make Instructor </button>
+                                    </td>
+                                    {/* <td>
+                            <button disabled={true} className='btn btn-outline border-pink-600 text-pink-600 w-32'>{user.role}</button>
+                        </td>
+                         */}
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </Fade>
             </div>
         </div>
     );

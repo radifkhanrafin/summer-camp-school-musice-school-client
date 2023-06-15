@@ -2,7 +2,7 @@ import React from 'react';
 import useAxiosSecure from '../../../UseHooks/useAxiosSecure/useAxiosSecure';
 import useAuth from '../../../UseHooks/useAuth/useAuth';
 import { useQuery } from 'react-query';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaPenAlt, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const My_Class = () => {
@@ -28,7 +28,7 @@ const My_Class = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/class/${id}`, {
+                fetch(`https://summer-school-data.vercel.app/class/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -62,8 +62,8 @@ const My_Class = () => {
                             <th>Tutorial</th>
                             <th>Total Enrolled</th>
                             <th>Available Seats</th>
-                            <th>Remove</th>
-                            {/* <th>Update</th> */}
+                            <th>Remove </th>
+                            <th>Update</th>
                             <th>Admin Feedback</th>
                         </tr>
                     </thead>
@@ -75,8 +75,17 @@ const My_Class = () => {
                                 <td>{AllClass.name}</td>
                                 <td>{AllClass.enrolled_Student}</td>
                                 <td>{AllClass.seats}</td>
-                                <td><button onClick={() => removeMyClass(AllClass._id)}><FaTrashAlt className='text-2xl text-error hover:text-blue-700' /></button></td>
-                                
+                                <td className=''>
+                                    <button onClick={() => removeMyClass(AllClass._id)} className='bg-transparent hover:bg-transparent '>
+                                        <FaTrashAlt className='text-2xl text-error hover:text-black' />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button className='bg-transparent hover:bg-transparent '>
+                                        <FaPenAlt className='text-2xl text-error hover:text-blue-700' />
+                                    </button>
+                                </td>
+
                                 <th>
                                     {
                                         AllClass.status === 'denied' ? <span className='px-2 style-btn '> Admin FeedBack</span> : AllClass.status === 'approved' ? <span className='text-success'>{AllClass.status}</span> : <span className='text-pink-600'>{AllClass.status}...</span>
@@ -84,7 +93,7 @@ const My_Class = () => {
                                 </th>
                             </tr>)
                         }
-                        
+
                     </tbody>
 
 

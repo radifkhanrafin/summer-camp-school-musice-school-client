@@ -3,7 +3,6 @@ import {
     createBrowserRouter,
 } from "react-router-dom";
 import UserLayout from '../Layout/UserLayout';
-import SignUp from '../Pages/SignUp/SignUp';
 import Instructors from '../Pages/Instructors/Instructors';
 import DashBord from '../Layout/DashBord';
 import SelectedClasss from '../Dashbord/StudentDashbord/SelectedClasss/SelectedClasss';
@@ -17,18 +16,28 @@ import ManageClass from '../Dashbord/AdminDashbord/ManageClass/ManageClass';
 import Web_Analysis from '../Dashbord/AdminDashbord/Web_Analysis/Web_Analysis';
 import Class from '../Pages/Class/Class';
 import StudentDashbord from '../Dashbord/StudentDashbord/StudentDashbord';
-// import CheckOutForm from '../Dashbord/StudentDashbord/CheckOutForm/CheckOutForm';
 import Payment_Checkout from '../Dashbord/StudentDashbord/Payment_Checkout.jsx/Payment_Checkout';
 import Payment from '../Dashbord/StudentDashbord/Payment/Payment';
 import PrivateRoutes from './PrivateRoutes';
 import Payment_History from '../Dashbord/StudentDashbord/Payment_History/Payment_History';
+import InstructorsRoutes from './InstructorsRoutes';
+import AdminRoutes from './adminRoutes';
+import StudentHome from '../Dashbord/StudentDashbord/StudentHome/StudentHome';
+import Home from '../Pages/Home/Home';
+import SignUp from '../Pages/SignUp/SignUp';
+import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <UserLayout></UserLayout>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
+            {
+                path: '/',
+                element: <Home></Home>
+            },
             {
                 path: '/login',
                 element: <UserLogin></UserLogin>
@@ -52,8 +61,8 @@ const router = createBrowserRouter([
         element: <PrivateRoutes><DashBord></DashBord></PrivateRoutes>,
         children: [
             {
-                path: 'userHome',
-                element: <StudentDashbord></StudentDashbord>
+                path: 'usershome',
+                element: <StudentHome></StudentHome>
             },
             {
                 path: 'selectedcourse',
@@ -73,27 +82,27 @@ const router = createBrowserRouter([
             },
             {
                 path: 'addcourse',
-                element: <Add_Course></Add_Course>
+                element: <InstructorsRoutes><Add_Course></Add_Course></InstructorsRoutes>
             },
             {
                 path: 'myclass',
-                element: <My_Class></My_Class>
+                element: <InstructorsRoutes><My_Class></My_Class></InstructorsRoutes>
             },
             {
                 path: 'adminhome',
-                element: <AdminHome></AdminHome>
+                element: <AdminRoutes> <AdminHome></AdminHome></AdminRoutes>
             },
             {
                 path: 'manageuser',
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoutes> <ManageUsers></ManageUsers></AdminRoutes>
             },
             {
                 path: 'manageclass',
-                element: <ManageClass></ManageClass>
+                element: <AdminRoutes><ManageClass></ManageClass></AdminRoutes>
             },
             {
                 path: 'webanalysis',
-                element: <Web_Analysis></Web_Analysis>
+                element: <AdminRoutes><Web_Analysis></Web_Analysis></AdminRoutes>
             },
         ]
     }

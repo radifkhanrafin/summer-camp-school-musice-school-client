@@ -12,8 +12,12 @@ const Navbar = () => {
         <li><Link to={'/Instructors'}>Instructors</Link></li>
         <li><Link to={'/Class'}>Class</Link></li>
         <li><Link to='/dashbord'>Dashbord</Link></li>
-        { 
-            user && <li> <Link> <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="" /></Link></li>
+        {
+            user &&
+            <>
+
+                <li> <Link> <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="" /></Link></li>
+            </>
         }
     </>
 
@@ -40,7 +44,10 @@ const Navbar = () => {
                         {navMenu}
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                <div className='flex items-center'>
+                    <img className='w-24' src="https://i.ibb.co/PgLk782/music.png" alt="" />
+                    <h3 className='brandName -ml-6 font-semibold font-serif'>Music Class</h3>
+                </div>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 justify-center items-center text-lg font-semibold">

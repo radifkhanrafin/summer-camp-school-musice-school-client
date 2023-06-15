@@ -1,7 +1,6 @@
 import React from 'react';
 import useAuth from '../../UseHooks/useAuth/useAuth';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaPenAlt, FaUserAlt } from 'react-icons/fa';
 
 const AdminDashbord = () => {
     const { user } = useAuth()
@@ -14,9 +13,9 @@ const AdminDashbord = () => {
                 <li >{user?.email}</li>
                 <li >{user?.role}</li>
             </div>
-            <li><NavLink to='/dashbord/adminhome'><FaHome />Admin home </NavLink></li>
-            <li><NavLink to='/dashbord/manageuser'> <FaUserAlt /> Manage Users </NavLink></li>
-            <li><NavLink to='/dashbord/manageclass'> <FaPenAlt /> Manage Class </NavLink></li>
+            <li><NavLink to='/dashbord/adminhome'>Admin home </NavLink></li>
+            <li><NavLink to='/dashbord/manageuser'>  Manage Users </NavLink></li>
+            <li><NavLink to='/dashbord/manageclass'> Manage Class </NavLink></li>
             <li><NavLink to='/dashbord/webanalysis'>Web Analysis</NavLink></li>
         </>
     );

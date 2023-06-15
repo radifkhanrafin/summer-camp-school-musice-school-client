@@ -6,6 +6,7 @@ import InstuctorDashbord from '../Dashbord/InstuctorDashbord/InstuctorDashbord';
 import AdminDashbord from '../Dashbord/AdminDashbord/AdminDashbord';
 import useAdmin from '../UseHooks/useAdmin/useAdmin';
 import useinstuctor from '../UseHooks/useInstuctors/useinstuctor';
+import Footer from '../SharePage/Footer/Footer';
 
 const DashBord = () => {
     const [isAdmin] = useAdmin()
@@ -13,7 +14,8 @@ const DashBord = () => {
     // console.log(isinstuctor)
     // console.log(isAdmin)
     return (
-        <div className="drawer lg:drawer-open">
+       <div>
+         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content mt-12  ml-8">
                 {/* Page content here */}
@@ -39,6 +41,8 @@ const DashBord = () => {
 
             </div>
         </div>
+        <Footer></Footer>
+       </div>
     );
 };
 

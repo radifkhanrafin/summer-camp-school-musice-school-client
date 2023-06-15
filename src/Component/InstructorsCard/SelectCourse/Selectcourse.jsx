@@ -3,8 +3,8 @@ import useSelectCouese from '../../../UseHooks/useSelectCouese/useSelectCouese';
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-const Selectcourse = ({ course, index, handleRemovecourse, handleCourseFeePayment }) => {
-    const { image, name, instructors_Name, price, _id  , payment_status} = course;
+const Selectcourse = ({ course, index, handleRemovecourse, refetch }) => {
+    const { image, name, instructors_Name, price, _id, payment_status } = course;
 
 
 
@@ -21,7 +21,7 @@ const Selectcourse = ({ course, index, handleRemovecourse, handleCourseFeePaymen
                     <button className='gradient-btn w-20'>Pay</button>
                 </Link>
             </td>
-            
+
         </tr>
     );
 };

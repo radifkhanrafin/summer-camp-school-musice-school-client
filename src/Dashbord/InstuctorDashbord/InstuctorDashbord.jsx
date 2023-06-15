@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaHome, FaMailBulk, FaShoppingBag, FaUtensils } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../UseHooks/useAuth/useAuth';
 
@@ -13,9 +12,9 @@ const InstuctorDashbord = () => {
                 <li >{user?.displayName}</li>
                 <li >{user?.email}</li>
             </div>
-            <li><NavLink to='/dashbord/usershome'><FaHome /> Instuctor home </NavLink></li>
+            <li><NavLink to='/dashbord/usershome'> Instuctor home </NavLink></li>
 
-            <li><NavLink to='/dashbord/addcourse'> <FaUtensils /> Add Course </NavLink></li>
+            <li><NavLink to='/dashbord/addcourse'>  Add Course </NavLink></li>
             <li><NavLink to='/dashbord/myclass'> My Classes</NavLink></li>
         </>
     );

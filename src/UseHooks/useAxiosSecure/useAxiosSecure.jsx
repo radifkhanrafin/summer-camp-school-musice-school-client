@@ -8,7 +8,7 @@ const useAxiosSecure = () => {
 
 
     const axiosSecure = axios.create({
-        baseURL: 'http://localhost:5000',
+        baseURL: 'https://summer-school-data.vercel.app',
     });
 
     useEffect(() => {
@@ -28,8 +28,8 @@ const useAxiosSecure = () => {
                 // console.log('axiox error respone' , error.response)
                 console.log(error)
                 if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-                    // await logOut();
-                    // navigate('/login');
+                    await logOut();
+                    navigate('/login');
                     console.log('user logout')
                 }
                 return Promise.reject(error);

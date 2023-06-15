@@ -49,14 +49,16 @@ const AuthProvaiders = ({ children }) => {
             setUser(presentUser);
             // console.log('present user', presentUser);
             setUser(presentUser)
+            setLoading(false)
             if (presentUser) {
                 // console.log('res');
-                axios.post('http://localhost:5000/jwt', { email: presentUser.email })
+                axios.post('https://summer-school-data.vercel.app/jwt', { email: presentUser.email })
                     .then(response => {
                         console.log('res', response.data.token);
                         localStorage.setItem('access-token', response.data.token);
-                        setLoading(false);
+
                     })
+               
             }
             localStorage.removeItem('access-token')
 

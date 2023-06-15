@@ -4,6 +4,7 @@ import { useState } from "react";
 import './CheckOut.css'
 import useAuth from "../../../UseHooks/useAuth/useAuth";
 import useAxiosSecure from "../../../UseHooks/useAxiosSecure/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 
 const Payment_Checkout = ({ course, price }) => {
@@ -16,6 +17,7 @@ const Payment_Checkout = ({ course, price }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
+    const navigate = useNavigate()
     // console.log('course', course)
     useEffect(() => {
         if (price > 0) {
@@ -78,13 +80,14 @@ const Payment_Checkout = ({ course, price }) => {
         if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id);
 
-            fetch(`http://localhost:5000/coursefeepayment/${course._id}`, {
+            fetch(`https://summer-school-data.vercel.app/coursefeepayment/${course._id}`, {
                 method: 'PATCH'
             })
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
                     alert('paid')
+                    navigate('/dashbord/selectedcourse')
 
                 })
 
@@ -112,7 +115,7 @@ const Payment_Checkout = ({ course, price }) => {
                         console.log('payment successful')
 
 
-                        fetch(`http://localhost:5000/availableseats/${course.classID}`, {
+                        fetch(`https://summer-school-data.vercel.app/availableseats/${course.classID}`, {
                             method: 'PATCH'
                         })
                             .then(res => res.json())

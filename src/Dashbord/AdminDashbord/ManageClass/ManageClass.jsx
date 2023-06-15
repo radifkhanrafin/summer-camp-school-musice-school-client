@@ -16,7 +16,7 @@ const ManageClass = () => {
 
     const handleAppproveClass = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/approveclass/${id}`, {
+        fetch(`https://summer-school-data.vercel.app/approveclass/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -40,7 +40,7 @@ const ManageClass = () => {
             confirmButtonText: 'Yes, Deny it'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/denyclass/${id}`, {
+                fetch(`https://summer-school-data.vercel.app/denyclass/${id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())

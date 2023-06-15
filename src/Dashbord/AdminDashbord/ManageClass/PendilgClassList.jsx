@@ -15,8 +15,7 @@ const PendilgClassList = ({ tutorial, index, handleAppproveClass, handledenyClas
                 <button onClick={() => handledenyClass(tutorial._id)} className='style-btn'>Deny</button>
             </td>
             <td >
-                <Link to='/payment' data={tutorial._id}>
-                    <button > <FaPenFancy title="Senf Feedback" className='ml-5 border-2 hover:bg-slate-700 hover:text-white text-5xl p-2 rounded-md' /></button>
+                <Link to='/payment' data={tutorial._id}> <FaPenFancy title="Send Feedback" className='ml-5 border-2 hover:bg-slate-700 hover:text-white text-5xl p-2 rounded-md' />
                 </Link>
             </td>
 

@@ -130,21 +130,3 @@ const CheckoutForm = ({ cart, price }) => {
 };
 
 export default CheckoutForm;
-
-
-
-
-// import React from 'react';
-// import { useLocation } from 'react-router-dom';
-
-// const CheckOutForm = () => {
-//     const paymentData=useLocation()
-//     console.log(paymentData.state)
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default CheckOutForm;

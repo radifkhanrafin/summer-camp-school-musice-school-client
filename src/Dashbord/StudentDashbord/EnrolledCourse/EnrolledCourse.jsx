@@ -15,6 +15,7 @@ const EnrolledCourse = () => {
     console.log(enrolledcourse)
     return (
         <div>
+            <h2 className='text-center text-2xl font-semibold'>Enrolled course</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
