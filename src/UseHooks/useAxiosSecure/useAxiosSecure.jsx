@@ -8,7 +8,7 @@ const useAxiosSecure = () => {
 
 
     const axiosSecure = axios.create({
-        baseURL: 'https://summer-school-data.vercel.app',
+        baseURL: 'http://localhost:5000',
     });
 
     useEffect(() => {

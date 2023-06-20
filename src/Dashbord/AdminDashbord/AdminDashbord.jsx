@@ -13,9 +13,9 @@ const AdminDashbord = () => {
                 <li >{user?.email}</li>
                 <li >{user?.role}</li>
             </div>
-            <li><NavLink to='/dashbord/adminhome'>Admin home </NavLink></li>
-            <li><NavLink to='/dashbord/manageuser'>  Manage Users </NavLink></li>
-            <li><NavLink to='/dashbord/manageclass'> Manage Class </NavLink></li>
+            <li><NavLink to='/dashbord/adminhome'> Admin home </NavLink></li>
+            <li><NavLink to='/dashbord/manageuser'> Manage Users </NavLink></li>
+            <li><NavLink to='/dashbord/managepost'> Manage Post </NavLink></li>
             <li><NavLink to='/dashbord/webanalysis'>Web Analysis</NavLink></li>
         </>
     );

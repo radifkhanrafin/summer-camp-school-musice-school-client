@@ -5,27 +5,40 @@ import {
 import UserLayout from '../Layout/UserLayout';
 import Instructors from '../Pages/Instructors/Instructors';
 import DashBord from '../Layout/DashBord';
-import SelectedClasss from '../Dashbord/StudentDashbord/SelectedClasss/SelectedClasss';
-import EnrolledCourse from '../Dashbord/StudentDashbord/EnrolledCourse/EnrolledCourse';
-import Add_Course from '../Dashbord/InstuctorDashbord/Add_Course/Add_Course';
-import My_Class from '../Dashbord/InstuctorDashbord/My_Class/My_Class';
+// import SelectedClasss from '../Dashbord/StudentDashbord/SelectedClasss/SelectedClasss';
+// import EnrolledCourse from '../Dashbord/StudentDashbord/EnrolledCourse/EnrolledCourse';
+// import Add_Course from '../Dashbord/InstuctorDashbord/Add_Course/Add_Course';
+// import My_Class from '../Dashbord/InstuctorDashbord/My_Class/My_Class';
 import UserLogin from '../Pages/Login/UserLogin';
 import AdminHome from '../Dashbord/AdminDashbord/AdminHome/AdminHome';
 import ManageUsers from '../Dashbord/AdminDashbord/manageUsers/ManageUsers';
-import ManageClass from '../Dashbord/AdminDashbord/ManageClass/ManageClass';
 import Web_Analysis from '../Dashbord/AdminDashbord/Web_Analysis/Web_Analysis';
-import Class from '../Pages/Class/Class';
-import StudentDashbord from '../Dashbord/StudentDashbord/StudentDashbord';
-import Payment_Checkout from '../Dashbord/StudentDashbord/Payment_Checkout.jsx/Payment_Checkout';
-import Payment from '../Dashbord/StudentDashbord/Payment/Payment';
+import Class from '../Pages/Post/Post';
+// import StudentDashbord from '../Dashbord/StudentDashbord/StudentDashbord';
+// import Payment_Checkout from '../Dashbord/StudentDashbord/Payment_Checkout.jsx/Payment_Checkout';
+// import Payment from '../Dashbord/StudentDashbord/Payment/Payment';
 import PrivateRoutes from './PrivateRoutes';
-import Payment_History from '../Dashbord/StudentDashbord/Payment_History/Payment_History';
-import InstructorsRoutes from './InstructorsRoutes';
+// import Payment_History from '../Dashbord/StudentDashbord/Payment_History/Payment_History';
 import AdminRoutes from './adminRoutes';
-import StudentHome from '../Dashbord/StudentDashbord/StudentHome/StudentHome';
+// import StudentHome from '../Dashbord/StudentDashbord/StudentHome/StudentHome';
 import Home from '../Pages/Home/Home';
 import SignUp from '../Pages/SignUp/SignUp';
 import ErrorPage from '../Pages/ErrorPage/ErrorPage';
+import DoctorsRoutes from './DoctorsRoutes';
+import UsersDashbord from '../Dashbord/UsersDashbord/UsersDashbord';
+import Add_Post from '../Dashbord/DoctorsDashbord/Add_Post/Add_Post';
+import My_Post from '../Dashbord/DoctorsDashbord/My_Post/My_Post';
+import ManagePost from '../Dashbord/AdminDashbord/ManageClass/ManagePost';
+import Post from '../Pages/Post/Post';
+import SelectedPost from '../Dashbord/UsersDashbord/SelectedPost/SelectedPost';
+import BookedPost from '../Dashbord/UsersDashbord/bookedPost/bookedPost';
+import CheckOutForm from '../Dashbord/UsersDashbord/CheckOutForm/CheckOutFormSuccess';
+import Payment_History from '../Dashbord/UsersDashbord/Payment_History/Payment_History';
+import CheckOutFormSuccess from '../Dashbord/UsersDashbord/CheckOutForm/CheckOutFormSuccess';
+import CheckOutFormFail from '../Dashbord/UsersDashbord/CheckOutForm/CheckOutFormFail';
+import Feedback from '../Dashbord/UsersDashbord/Feedback/Feedback';
+import Review from '../Dashbord/DoctorsDashbord/Review/Review';
+import Our_doctor from '../Pages/Our_doctor/Our_doctor';
 
 
 const router = createBrowserRouter([
@@ -47,12 +60,16 @@ const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: '/Instructors',
-                element: <Instructors></Instructors>
+                path: '/doctors',
+                element: <Our_doctor></Our_doctor>
             },
             {
-                path: '/Class',
-                element: <Class></Class>
+                path: '/post',
+                element: <Post></Post>
+            },
+            {
+                path: '/review',
+                element: <Review></Review>
             },
         ]
     },
@@ -62,31 +79,39 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'usershome',
-                element: <StudentHome></StudentHome>
+                element: <UsersDashbord></UsersDashbord>
             },
             {
-                path: 'selectedcourse',
-                element: <SelectedClasss></SelectedClasss>
+                path: 'selectedpost',
+                element: <SelectedPost></SelectedPost>
             },
             {
-                path: 'enrolledcourse',
-                element: <EnrolledCourse></EnrolledCourse>
+                path: 'bookedpost',
+                element: <BookedPost></BookedPost>
             },
             {
-                path: 'payment',
-                element: <Payment></Payment>
+                path: 'payment/successful/:trans_Id',
+                element: <CheckOutFormSuccess></CheckOutFormSuccess>
+            },
+            {
+                path: 'payment/fail',
+                element: <CheckOutFormFail></CheckOutFormFail>
             },
             {
                 path: 'paymenthistory',
                 element: <Payment_History></Payment_History>
             },
             {
-                path: 'addcourse',
-                element: <InstructorsRoutes><Add_Course></Add_Course></InstructorsRoutes>
+                path: 'feedback',
+                element: <Feedback></Feedback>
             },
             {
-                path: 'myclass',
-                element: <InstructorsRoutes><My_Class></My_Class></InstructorsRoutes>
+                path: 'addpost',
+                element: <DoctorsRoutes><Add_Post></Add_Post></DoctorsRoutes>
+            },
+            {
+                path: 'mypost',
+                element: <DoctorsRoutes><My_Post></My_Post></DoctorsRoutes>
             },
             {
                 path: 'adminhome',
@@ -97,8 +122,8 @@ const router = createBrowserRouter([
                 element: <AdminRoutes> <ManageUsers></ManageUsers></AdminRoutes>
             },
             {
-                path: 'manageclass',
-                element: <AdminRoutes><ManageClass></ManageClass></AdminRoutes>
+                path: 'managepost',
+                element: <AdminRoutes><ManagePost></ManagePost></AdminRoutes>
             },
             {
                 path: 'webanalysis',

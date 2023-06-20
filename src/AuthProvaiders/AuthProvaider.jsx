@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
-import app from '../firebase/firebase.config';
+// import app from '../firebase/firebase.config';
+import app from '../firebase/firebase.config'
+
 import useAxiosSecure from '../UseHooks/useAxiosSecure/useAxiosSecure';
 
 
@@ -25,11 +27,6 @@ const AuthProvaiders = ({ children }) => {
     }
 
 
-    // const signIn = (email, password) => {
-    //     setLoading(true)
-    //     return signInWithEmailAndPassword(auth, email, password)
-    // }
-
     const login = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
@@ -52,9 +49,9 @@ const AuthProvaiders = ({ children }) => {
             setLoading(false)
             if (presentUser) {
                 // console.log('res');
-                axios.post('https://summer-school-data.vercel.app/jwt', { email: presentUser.email })
+                axios.post('http://localhost:5000/jwt', { email: presentUser.email })
                     .then(response => {
-                        console.log('res', response.data.token);
+                        // console.log('res', response.data.token);
                         localStorage.setItem('access-token', response.data.token);
 
                     })

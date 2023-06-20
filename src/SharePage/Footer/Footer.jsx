@@ -2,10 +2,10 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-slate-500 text-base-content">
+        <footer className="footer p-10 bg-slate-200 text-base-content">
             <div>
-            <img className='w-36' src="https://i.ibb.co/PgLk782/music.png" alt="" />
-                <p>ACME Music Ltd.<br />Providing reliable tech since 1992</p>
+            <img className='w-28' src="https://i.ibb.co/Px5jqmC/health-care-removebg-preview.png" alt="" />
+                <p>Health Care Medical Ltd.<br />Providing reliable tech since 1992</p>
             </div>
             <div>
                 <span className="footer-title">Services</span>

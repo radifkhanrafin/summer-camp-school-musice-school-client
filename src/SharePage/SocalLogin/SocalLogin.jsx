@@ -14,10 +14,10 @@ const SocalLogin = () => {
         googleLogin()
             .then(result => {
                 const loggedUser = result.user;
-                const userinfo = { name: loggedUser.displayName, email: loggedUser.email, userProfile: loggedUser.photoURL, role: "student" };
+                const userinfo = { name: loggedUser.displayName, email: loggedUser.email, userProfile: loggedUser.photoURL, role: "users" };
                 console.log(userinfo)
 
-                fetch('https://summer-school-data.vercel.app/users', {
+                fetch('http://localhost:5000/users', {
                     method: "POST",
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(userinfo)
@@ -38,7 +38,7 @@ const SocalLogin = () => {
     }
     return (
         <div className='p-3'>
-            <button className='w-full flex justify-center items-center gap-2 capitalize  ' onClick={handleGoogleLogin}>
+            <button className='hover-btn w-full ' onClick={handleGoogleLogin}>
                 <FaGoogle className='text-red-800 text-2xl' />
                 continue with google
             </button>

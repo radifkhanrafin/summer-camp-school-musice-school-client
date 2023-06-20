@@ -17,6 +17,7 @@ const UserLogin = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [hidePass, setHidePass] = useState(false);
     // console.log(hidePass)
+
     const onSubmit = data => {
 
         console.log(data)
@@ -24,8 +25,8 @@ const UserLogin = () => {
             .then(result => {
                 console.log(result.user)
                 const user = result.user
-                const userinfo = { name: user.displayName, email: user.email, userProfile: user.photoURL, role: "student" };
-                fetch('https://summer-school-data.vercel.app/users', {
+                const userinfo = { name: user.displayName, email: user.email, userProfile: user.photoURL, role: "users" };
+                fetch('http://localhost:5000/users', {
                     method: "POST",
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(userinfo)
@@ -49,9 +50,9 @@ const UserLogin = () => {
                     <Lottie animationData={loginAnimation}></Lottie>
 
                 </div>
-                <div className="card  p-2 w-full max-w-sm shadow-2xl space-y-0 bg-base-100">
-                    <form onSubmit={handleSubmit(onSubmit)} className="-mb-0">
-                        <div className="form-control -mt-16">
+                <div className="card  p-12  shadow-2xl space-y-5 bg-base-100">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+                        <div className="form-control ">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
@@ -64,15 +65,15 @@ const UserLogin = () => {
                             </label>
                             <div className='relative'>
                                 <input type={hidePass ? 'text' : 'password'} placeholder="password" className="text-input" {...register("password")} required />
-                                <span onClick={() => setHidePass(!hidePass)} className='absolute top-6  right-5'>{hidePass ? <FaEyeSlash /> : <FaEye />} </span>
+                                <span onClick={() => setHidePass(!hidePass)} className='absolute top-4  right-8'>{hidePass ? <FaEyeSlash /> : <FaEye />} </span>
                             </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-2">
-                            <input className='btn w-full bg-slate-700 text-white hover:text-black ' type="submit" value="LOGIN" />
-                            <p className='text-sm'>Create a Accout <Link to='/signup' className='underline text-blue-400'>Sign Up</Link></p>
+                            <input className='btn w-96 bg-slate-700 text-white hover:text-black ' type="submit" value="LOGIN" />
+                            <p className='text-sm mt-3'>Create a Accout <Link to='/signup' className='underline text-blue-400'>Sign Up</Link></p>
 
                         </div>
                     </form>

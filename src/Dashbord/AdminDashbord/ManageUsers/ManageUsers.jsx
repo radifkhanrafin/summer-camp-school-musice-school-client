@@ -14,7 +14,7 @@ const ManageUsers = () => {
 
     const handlemakeAdmin = (user) => {
         console.log(user)
-        fetch(`https://summer-school-data.vercel.app/users/admin/${user._id}`, {
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -26,7 +26,7 @@ const ManageUsers = () => {
     }
     const handlemakeInstructor = (user) => {
         console.log(user)
-        fetch(`https://summer-school-data.vercel.app/users/instructor/${user._id}`, {
+        fetch(`http://localhost:5000/users/doctor/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -67,12 +67,9 @@ const ManageUsers = () => {
                                     </td>
                                     <td>
 
-                                        <button disabled={user.role === 'instructor'} onClick={() => handlemakeInstructor(user)} className='btn btn-outline border-pink-600 text-pink-600 w-36 text-xs'>Make Instructor </button>
+                                        <button disabled={user.role === 'doctor'} onClick={() => handlemakeInstructor(user)} className='btn btn-outline border-pink-600 text-pink-600 w-36 text-xs'>Make Doctor </button>
                                     </td>
-                                    {/* <td>
-                            <button disabled={true} className='btn btn-outline border-pink-600 text-pink-600 w-32'>{user.role}</button>
-                        </td>
-                         */}
+                                    
                                 </tr>
                             )}
                         </tbody>
